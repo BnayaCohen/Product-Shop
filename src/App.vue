@@ -1,11 +1,9 @@
 <template>
-  <section class="home">
     <app-header />
     <app-hero />
     <items-filter @setFilter="setFilter" />
     <items-list v-if="itemsToShow" :items="itemsToShow" />
     <app-footer />
-  </section>
 </template>
 
 <script>

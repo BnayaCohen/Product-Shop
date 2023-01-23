@@ -31,12 +31,10 @@ function getById(itemId) {
 }
 
 function _getDaysDiff(date) {
-	// Convert both dates to milliseconds
-	var now_ms = new Date().getTime();
-	var date_ms = date.getTime();
-	// Calculate the difference in milliseconds
-	var difference_ms = date_ms - now_ms;
-	// Convert the difference back to days
+	const now_ms = new Date().getTime();
+	const date_ms = date.getTime();
+	const difference_ms = date_ms - now_ms;
+	
 	return Math.round(difference_ms / (1000 * 3600 * 24));
 }
 
@@ -46,7 +44,7 @@ function _isIncludingDate(datesArray, date) {
 		if (datesArray[i].getDate() === date.getDate() &&
 			datesArray[i].getMonth() === date.getMonth() &&
 			datesArray[i].getFullYear() === date.getFullYear()) {
-console.log(true);
+
 			return true
 		}
 	}

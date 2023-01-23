@@ -1,6 +1,5 @@
 <template>
     <ul class="items-list">
-        <h1>{{ items.length }}</h1>
         <li v-for="item in items" :key="item.id">
             <item-preview :item="item" />
         </li>
@@ -23,7 +22,29 @@ export default {
 
 <style>
 .items-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+/* add media query for screens smaller than 1200px */
+@media (max-width: 1200px) {
+    .items-list {
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+}
+
+/* add media query for screens smaller than 992px */
+@media (max-width: 992px) {
+    .items-list {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+}
+
+/* add media query for screens smaller than 576px */
+@media (max-width: 576px) {
+    .items-list {
+        grid-template-columns: repeat(1, minmax(220px, 1fr));
+    }
 }
 </style>

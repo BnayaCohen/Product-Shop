@@ -1,14 +1,10 @@
 <template>
-  <section class="item-filter">
-    <datePicker v-model="filterBy.date" 
-    :min-date="new Date()" 
-    :max-date="twoWeeksFromNow"
-    @update:modelValue="filter" />
-    <!-- <el-button-group class="ml-4">
-      <el-button type="primary" @click="setSort('name')">Name</el-button>
-      <el-button type="primary" @click="setSort('date')">Date</el-button>
-      <el-button type="primary" @click="setSort('price')">Price</el-button>
-    </el-button-group> -->
+  <section class="mb-6 flex justify-center items-center">
+    <datePicker class="bg-gray-800 text-white" 
+      v-model="filterBy.date" 
+      :min-date="new Date()"
+      :max-date="twoWeeksFromNow" 
+      @update:modelValue="filter" />
   </section>
 </template>
 
@@ -18,14 +14,10 @@ import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
   name: 'item-filter',
-  components: {
-    datePicker
-  },
   data() {
     return {
       filterBy: {
         date: null,
-        // sortBy: null,
       },
     }
   },
@@ -33,11 +25,7 @@ export default {
     filter(date) {
       this.filterBy.date = date
       this.$emit('setFilter', this.filterBy)
-    },
-    // setSort(sortBy) {
-    //   this.filterBy.sortBy = sortBy
-    //   this.$emit('setFilter', this.filterBy)
-    // }
+    }
   },
   computed: {
     twoWeeksFromNow() {
@@ -45,6 +33,9 @@ export default {
       date.setDate(date.getDate() + 14);
       return date;
     },
+  },
+  components: {
+    datePicker
   },
 }
 </script>
