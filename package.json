@@ -1,7 +1,7 @@
 {
   "name": "product-store",
   "private": true,
-  "homepage": "https://BnayaCohen.github.io/Product-Shop/",
+  "homepage": "https://BnayaCohen.github.io/Product-Shop",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
