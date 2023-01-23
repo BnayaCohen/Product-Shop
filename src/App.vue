@@ -1,27 +1,21 @@
 <template>
     <app-header />
-    <app-hero />
-    <items-filter @setFilter="setFilter" />
+    <items-filter @setFilter="filterItems" />
     <items-list v-if="itemsToShow" :items="itemsToShow" />
-    <app-footer />
 </template>
 
 <script>
 import appHeader from './components/app-header.vue'
-import appHero from './components/app-hero.vue'
 import itemsFilter from './components/item-filter.vue'
 import itemsList from './components/item-list.vue'
-import appFooter from './components/app-footer.vue'
 import { itemService } from './services/itemService'
 
 export default {
   name: 'app',
   components: {
     appHeader,
-    appHero,
     itemsFilter,
     itemsList,
-    appFooter
   },
   data() {
     return {
@@ -32,7 +26,7 @@ export default {
     this.itemsToShow = itemService.getItems()
   },
   methods: {
-    setFilter(filterBy) {
+    filterItems(filterBy) {
       this.itemsToShow = itemService.getItems(filterBy)
     },
   }

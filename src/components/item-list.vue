@@ -1,5 +1,5 @@
 <template>
-    <ul class="items-list">
+    <ul class="items-list px-8">
         <li v-for="item in items" :key="item.id">
             <item-preview :item="item" />
         </li>
@@ -27,21 +27,19 @@ export default {
     gap: 1rem;
 }
 
-/* add media query for screens smaller than 1200px */
+/* Media Queries */
 @media (max-width: 1200px) {
     .items-list {
         grid-template-columns: repeat(3, minmax(220px, 1fr));
     }
 }
 
-/* add media query for screens smaller than 992px */
 @media (max-width: 992px) {
     .items-list {
         grid-template-columns: repeat(2, minmax(220px, 1fr));
     }
 }
 
-/* add media query for screens smaller than 576px */
 @media (max-width: 576px) {
     .items-list {
         grid-template-columns: repeat(1, minmax(220px, 1fr));

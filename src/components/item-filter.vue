@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-6 flex justify-center items-center">
+  <section class="my-5 flex justify-center items-center">
     <datePicker class="bg-gray-800 text-white" 
       v-model="filterBy.date" 
       :min-date="new Date()"
