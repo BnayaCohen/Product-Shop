@@ -1,41 +1,58 @@
 <template>
-  <section class="my-5 flex justify-center items-center">
-    <datePicker class="bg-gray-800 text-white" 
-      v-model="filterBy.date" 
+  <section class="py-5 flex justify-center items-center">
+    <datePicker
+      v-model="filterBy.date"
       :min-date="new Date()"
-      :max-date="twoWeeksFromNow" 
-      @update:modelValue="filter" />
+      :max-date="twoWeeksFromNow"
+      hide-offset-dates
+      auto-apply
+      format="dd/MM/yyyy"
+      input-class-name="datepicker"
+      locale="he"
+      :day-names="dayNames"
+      :enable-time-picker="false"
+      week-start="0"
+    />
   </section>
 </template>
 
-<script>
-import datePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
+<script setup>
+import { ref, computed, watch } from "vue";
 
-export default {
-  name: 'item-filter',
-  data() {
-    return {
-      filterBy: {
-        date: null,
-      },
-    }
+import datePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+
+const emit = defineEmits(["setFilter"]);
+
+const filterBy = ref({
+  date: null,
+});
+
+const dayNames = ["א", "ב", "ג", "ד", "ה", "ו", "ש"];
+
+watch(
+  filterBy,
+  (newVal) => {
+    emit("setFilter", newVal);
   },
-  methods: {
-    filter(date) {
-      this.filterBy.date = date
-      this.$emit('setFilter', this.filterBy)
-    }
-  },
-  computed: {
-    twoWeeksFromNow() {
-      var date = new Date();
-      date.setDate(date.getDate() + 14);
-      return date;
-    },
-  },
-  components: {
-    datePicker
-  },
-}
+  {
+    deep: true,
+  }
+);
+
+const twoWeeksFromNow = computed(() => {
+  var date = new Date();
+  date.setDate(date.getDate() + 14);
+  return date;
+});
 </script>
+
+<style>
+.dp__calendar_wrap {
+  @apply !font-sans;
+}
+
+.dp__inner_nav svg {
+  transform: scale(-1);
+}
+</style>
