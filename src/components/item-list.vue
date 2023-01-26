@@ -1,11 +1,12 @@
 <template>
-  <ul
+  <ul v-if="items.length"
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
   >
     <li v-for="item in items" :key="item.id">
-      <item-preview :item="item" />
+      <item-preview :item="item" :isCart="toggleCart" :addOrRemoveItem="addOrRemoveItem" />
     </li>
   </ul>
+  <h2 v-else class="text-1xl font-small text-gray-400 text-center my-8">אין מוצרים להצגה</h2>
 </template>
 
 <script setup>
@@ -16,7 +17,13 @@ defineProps({
     type: Array,
     required: true,
   },
+  toggleCart: {
+    type: Boolean,
+    required: false,
+  },
+  addOrRemoveItem: {
+      type: Function,
+      required: true
+    }
 });
 </script>
-
-<style></style>
