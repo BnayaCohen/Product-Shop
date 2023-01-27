@@ -1,7 +1,7 @@
 <template>
   <section class="container text-center">
     <h1 class="text-3xl font-small text-white my-3">העגלה שלך</h1>
-    <h1 class="text-1xl font-small text-white my-3">תאריך: {{ date }}</h1>
+    <h1 class="text-1xl font-small text-white my-3">לתאריך: {{ date.toDateString() }}</h1>
     <span class="text-1xl font-small text-white mx-4">סה"כ: {{ totalCartPrice }} שח</span>
     <items-list :items="items" :isCart="true" :addOrRemoveItem="addOrRemoveItem" />
   </section>
