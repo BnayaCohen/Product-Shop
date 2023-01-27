@@ -1,36 +1,28 @@
 <template>
   <app-header :isCart="toggleCart" @onToggleCart="() => toggleCart = !toggleCart" />
-  <div v-if="!toggleCart" class="container">
-    <items-filter @setFilter="filterItems" />
-    <items-list v-if="itemsToShow" :items="itemsToShow" :addOrRemoveItem="addOrRemoveItem" />
-  </div>
-  <div v-else class="container text-center">
-    <h1 class="text-3xl font-small text-white my-3">העגלה שלך</h1>
-    <span class="text-1xl font-small text-white mx-4">סה"כ: {{ totalCartPrice }} שח</span>
-    <items-list :items="cartItems" :toggleCart="true" :addOrRemoveItem="addOrRemoveItem" />
-  </div>
+
+  <items-app v-if="!toggleCart" :filterItems="filterItems" :items="itemsToShow" :addOrRemoveItem="addOrRemoveItem" />
+  <items-cart v-else :items="cartItems" :addOrRemoveItem="addOrRemoveItem" :date="date" />
 </template>
 
 <script setup>
-import { computed, onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import appHeader from "./components/app-header.vue";
-import itemsFilter from "./components/item-filter.vue";
-import itemsList from "./components/item-list.vue";
+import itemsApp from "./pages/item-app.vue";
+import itemsCart from "./pages/item-cart.vue";
 import { itemService } from "./services/itemService";
 
 const toggleCart = ref(false);
 const itemsToShow = ref([]);
 const cartItems = ref([]);
+const date = ref(null);
 
 onBeforeMount(() => {
   itemsToShow.value = itemService.getItems();
 });
 
-const totalCartPrice = computed(() => {
-  return cartItems.value.reduce((acc, item) => acc + item.price * item.quantity, 0)
-});
-
 function filterItems(filterBy) {
+  date.value = filterBy.date
   itemsToShow.value = itemService.getItems(filterBy);
 };
 
@@ -50,6 +42,5 @@ function addOrRemoveItem(item, diff) {
     name: item.name,
     quantity: 1
   });
-
-}
+};
 </script>
